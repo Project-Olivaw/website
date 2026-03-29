@@ -1,0 +1,182 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+
+const items = [
+  {
+    iconName: 'star' as const,
+    title: 'Star the project',
+    description: 'Show your support and help others discover Project Olivaw.',
+    accentColor: 'yellow' as const,
+  },
+  {
+    iconName: 'wrench-screwdriver' as const,
+    title: 'Contribute components',
+    description: 'Have a useful Rust robotics component? Submit it to the registry.',
+    accentColor: 'blue' as const,
+  },
+  {
+    iconName: 'users' as const,
+    title: 'Join the discussion',
+    description: 'Open issues, share ideas, and help shape the direction of the project.',
+    accentColor: 'red' as const,
+  },
+];
+---
+
+<section id="community" class="section community">
+  <div class="container community__inner">
+    <div class="community__text" data-animate>
+      <SectionTitle
+        eyebrow="Open Source"
+        title="Built in the open. Built together."
+        subtitle="Project Olivaw is community-driven. Every component, every decision, every line of code is public. Come build the future of robotics tooling."
+      />
+
+      <div class="community__actions">
+        <Button
+          variant="primary"
+          href="https://github.com/Project-Olivaw"
+          external={true}
+          iconLeft="github"
+          size="lg"
+        >
+          View on GitHub
+        </Button>
+        <Button
+          variant="secondary"
+          href="https://github.com/Project-Olivaw"
+          external={true}
+          iconRight="external-link"
+          size="lg"
+        >
+          Open an Issue
+        </Button>
+      </div>
+    </div>
+
+    <div class="community__grid" data-animate-stagger>
+      {
+        items.map((item) => (
+          <div class={`community__item community__item--${item.accentColor}`}>
+            <div class={`community__item-icon community__item-icon--${item.accentColor}`}>
+              <Icon name={item.iconName} size={20} ariaHidden={true} />
+            </div>
+            <div>
+              <h3 class="community__item-title">{item.title}</h3>
+              <p class="community__item-desc">{item.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .community__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .community__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .community__actions {
+    display: flex;
+    gap: 0.875rem;
+    flex-wrap: wrap;
+  }
+
+  .community__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .community__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    transition:
+      border-color var(--transition-fast),
+      transform var(--transition-base);
+  }
+
+  .community__item:hover {
+    transform: translateX(4px);
+  }
+
+  .community__item--blue:hover {
+    border-color: color-mix(in srgb, var(--color-accent-blue) 40%, transparent);
+  }
+
+  .community__item--red:hover {
+    border-color: color-mix(in srgb, var(--color-accent-red) 40%, transparent);
+  }
+
+  .community__item--yellow:hover {
+    border-color: color-mix(in srgb, var(--color-accent-yellow) 60%, transparent);
+  }
+
+  .community__item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+  }
+
+  .community__item-icon--blue {
+    color: var(--color-accent-blue);
+    background-color: color-mix(in srgb, var(--color-accent-blue) 12%, transparent);
+  }
+
+  .community__item-icon--red {
+    color: var(--color-accent-red);
+    background-color: color-mix(in srgb, var(--color-accent-red) 12%, transparent);
+  }
+
+  .community__item-icon--yellow {
+    color: color-mix(in srgb, var(--color-accent-yellow) 70%, var(--color-text-primary) 30%);
+    background-color: color-mix(in srgb, var(--color-accent-yellow) 15%, transparent);
+  }
+
+  .community__item-title {
+    font-size: var(--text-base);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .community__item-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .community__inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .community__actions {
+      flex-direction: column;
+    }
+  }
+</style>

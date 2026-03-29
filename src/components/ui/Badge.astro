@@ -1,0 +1,47 @@
+---
+import type { BadgeProps } from '../../types/components';
+
+interface Props extends BadgeProps {}
+
+const { text, color } = Astro.props;
+---
+
+<span class={`badge badge--${color}`}>{text}</span>
+
+<style>
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.625rem;
+    border-radius: 9999px;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid transparent;
+  }
+
+  .badge--blue {
+    color: var(--color-accent-blue);
+    background-color: color-mix(in srgb, var(--color-accent-blue) 10%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent-blue) 25%, transparent);
+  }
+
+  .badge--red {
+    color: var(--color-accent-red);
+    background-color: color-mix(in srgb, var(--color-accent-red) 10%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent-red) 25%, transparent);
+  }
+
+  .badge--yellow {
+    color: color-mix(in srgb, var(--color-accent-yellow) 80%, var(--color-text-primary) 20%);
+    background-color: color-mix(in srgb, var(--color-accent-yellow) 15%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent-yellow) 40%, transparent);
+  }
+
+  .badge--gray {
+    color: var(--color-text-muted);
+    background-color: color-mix(in srgb, var(--color-text-muted) 10%, transparent);
+    border-color: var(--color-border);
+  }
+</style>

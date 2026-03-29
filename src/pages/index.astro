@@ -1,11 +1,27 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import About from '../components/sections/About.astro';
+import Features from '../components/sections/Features.astro';
+import Projects from '../components/sections/Projects.astro';
+import GettingStarted from '../components/sections/GettingStarted.astro';
+import Community from '../components/sections/Community.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Project Olivaw"
+  description="Copy-paste Rust components for robotics and embedded systems. Like shadcn/ui, but for Rust — browse, copy, and own your embedded systems components."
+>
+  <Header />
+  <main id="main-content">
+    <Hero />
+    <About />
+    <Features />
+    <Projects />
+    <GettingStarted />
+    <Community />
+  </main>
+  <Footer />
 </Layout>

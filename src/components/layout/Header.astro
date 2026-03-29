@@ -1,0 +1,291 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<header class="header" role="banner">
+  <div class="header__inner container">
+    <!-- Logo -->
+    <a href="/" class="header__logo" aria-label="Project Olivaw home">
+      <span class="header__logo-mark" aria-hidden="true">O</span>
+      <span class="header__logo-text">Olivaw</span>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="header__nav" aria-label="Main navigation">
+      <ul class="header__nav-list" role="list">
+        <li>
+          <a href="#about" class="header__nav-link">About</a>
+        </li>
+        <li>
+          <a href="#projects" class="header__nav-link">Projects</a>
+        </li>
+        <li>
+          <a href="#getting-started" class="header__nav-link">Get Started</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Actions -->
+    <div class="header__actions">
+      <a
+        href="https://github.com/Project-Olivaw"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="header__github"
+        aria-label="View Project Olivaw on GitHub"
+        title="GitHub"
+      >
+        <Icon name="github" size={20} ariaHidden={true} />
+      </a>
+      <ThemeToggle />
+    </div>
+
+    <!-- Mobile menu button -->
+    <button
+      class="header__menu-btn"
+      aria-label="Open navigation menu"
+      id="mobile-menu-btn"
+      aria-expanded="false"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile nav -->
+  <div class="header__mobile-nav" id="mobile-nav" aria-hidden="true">
+    <nav aria-label="Mobile navigation">
+      <ul role="list">
+        <li><a href="#about" class="header__mobile-link">About</a></li>
+        <li><a href="#projects" class="header__mobile-link">Projects</a></li>
+        <li>
+          <a href="#getting-started" class="header__mobile-link">Get Started</a>
+        </li>
+        <li>
+          <a
+            href="https://github.com/Project-Olivaw"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="header__mobile-link"
+          >
+            GitHub
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const nav = document.getElementById('mobile-nav');
+
+  btn?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+    nav?.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Close mobile nav when a link is clicked
+  nav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('is-open');
+      btn?.setAttribute('aria-expanded', 'false');
+      nav.setAttribute('aria-hidden', 'true');
+    });
+  });
+</script>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: color-mix(in srgb, var(--color-bg) 80%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    transition:
+      background-color var(--transition-base),
+      border-color var(--transition-base);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    height: 4rem;
+    gap: 2rem;
+  }
+
+  /* Logo */
+  .header__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .header__logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.875rem;
+    height: 1.875rem;
+    background-color: var(--color-text-primary);
+    color: var(--color-text-inverse);
+    border-radius: var(--radius-sm);
+    font-size: var(--text-sm);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    font-style: italic;
+    transition:
+      background-color var(--transition-base),
+      color var(--transition-base);
+  }
+
+  .header__logo-text {
+    font-size: var(--text-base);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    transition: color var(--transition-base);
+  }
+
+  /* Nav */
+  .header__nav {
+    flex: 1;
+  }
+
+  .header__nav-list {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+  }
+
+  .header__nav-link {
+    padding: 0.375rem 0.75rem;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  .header__nav-link:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-subtle);
+  }
+
+  /* Actions */
+  .header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+
+  .header__github {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-md);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    transition:
+      color var(--transition-fast),
+      border-color var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  .header__github:hover {
+    color: var(--color-text-primary);
+    border-color: var(--color-text-muted);
+    background-color: var(--color-bg-subtle);
+  }
+
+  /* Mobile menu button */
+  .header__menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    padding: 0 7px;
+    margin-left: auto;
+  }
+
+  .header__menu-btn span {
+    display: block;
+    height: 1.5px;
+    background-color: var(--color-text-primary);
+    border-radius: 1px;
+    transition: transform var(--transition-fast);
+  }
+
+  /* Mobile nav */
+  .header__mobile-nav {
+    display: none;
+    padding: 1rem;
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+  }
+
+  .header__mobile-nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .header__mobile-link {
+    display: block;
+    padding: 0.625rem 0.75rem;
+    font-size: var(--text-base);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  .header__mobile-link:hover {
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-subtle);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header__nav {
+      display: none;
+    }
+
+    .header__github {
+      display: none;
+    }
+
+    .header__menu-btn {
+      display: flex;
+    }
+
+    .header__mobile-nav.is-open {
+      display: block;
+    }
+  }
+</style>

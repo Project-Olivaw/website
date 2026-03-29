@@ -1,0 +1,290 @@
+---
+import Icon from '../ui/Icon.astro';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer" role="contentinfo">
+  <div class="footer__inner container">
+    <div class="footer__top">
+      <!-- Brand -->
+      <div class="footer__brand">
+        <div class="footer__logo">
+          <span class="footer__logo-mark" aria-hidden="true">O</span>
+          <span class="footer__logo-text">Project Olivaw</span>
+        </div>
+        <p class="footer__tagline">
+          Copy-paste Rust components for robotics and embedded systems.
+        </p>
+        <a
+          href="https://github.com/Project-Olivaw"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer__github"
+          aria-label="Visit Project Olivaw on GitHub"
+        >
+          <Icon name="github" size={16} ariaHidden={true} />
+          <span>Project-Olivaw</span>
+        </a>
+      </div>
+
+      <!-- Links -->
+      <div class="footer__links">
+        <div class="footer__col">
+          <h3 class="footer__col-title">Projects</h3>
+          <ul role="list">
+            <li>
+              <a
+                href="https://github.com/Project-Olivaw"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer__link"
+              >
+                Sensor Plotter
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/Project-Olivaw"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer__link"
+              >
+                Robotic Display Face
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h3 class="footer__col-title">Resources</h3>
+          <ul role="list">
+            <li>
+              <a
+                href="https://github.com/Project-Olivaw"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer__link"
+              >
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://crates.io/crates/embedded-graphics"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer__link"
+              >
+                embedded-graphics
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://docs.rs/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer__link"
+              >
+                docs.rs
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h3 class="footer__col-title">Ecosystem</h3>
+          <ul role="list">
+            <li>
+              <a
+                href="https://www.rust-lang.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer__link"
+              >
+                Rust Language
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://crates.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer__link"
+              >
+                crates.io
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer__bottom">
+      <p class="footer__copy">
+        &copy; {currentYear} Project Olivaw. Open source under the MIT License.
+      </p>
+      <p class="footer__built">
+        Built with <a
+          href="https://astro.build"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer__built-link"
+        >Astro</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-bg-subtle);
+    padding-block: 4rem 2rem;
+    margin-top: 0;
+  }
+
+  .footer__top {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .footer__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .footer__logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    background-color: var(--color-text-primary);
+    color: var(--color-text-inverse);
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 800;
+    font-style: italic;
+  }
+
+  .footer__logo-text {
+    font-size: var(--text-base);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+  }
+
+  .footer__tagline {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    max-width: 28ch;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer__github {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer__github:hover {
+    color: var(--color-text-primary);
+  }
+
+  .footer__links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .footer__col-title {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .footer__col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .footer__link {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer__link:hover {
+    color: var(--color-text-primary);
+  }
+
+  .footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer__copy,
+  .footer__built {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .footer__built-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  .footer__built-link:hover {
+    color: var(--color-text-primary);
+  }
+
+  @media (max-width: 768px) {
+    .footer__top {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .footer__tagline {
+      max-width: none;
+    }
+
+    .footer__links {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer__links {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

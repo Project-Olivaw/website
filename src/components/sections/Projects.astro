@@ -1,0 +1,116 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import Card from '../ui/Card.astro';
+import Button from '../ui/Button.astro';
+import type { ProjectCardData } from '../../types/components';
+
+const projects: ProjectCardData[] = [
+  {
+    title: 'Sensor Plotter',
+    description:
+      'Real-time sensor monitoring with multi-channel plots. Visualize Temperature, IMU 3-Axis, and arbitrary data streams from your embedded device — built with egui for a native desktop experience.',
+    tags: ['egui', 'Rust', 'Real-Time', 'GUI', 'Sensors'],
+    githubHref: 'https://github.com/Project-Olivaw',
+    badgeText: 'Stable',
+    badgeColor: 'blue',
+    iconName: 'chart-bar',
+    accentColor: 'blue',
+  },
+  {
+    title: 'Robotic Display Face',
+    description:
+      'Animated face component for embedded displays. Renders expressive eyes, mouth, and emotional states using the embedded-graphics crate — compatible with any `DrawTarget` display driver, runs fully on bare-metal.',
+    tags: ['embedded-graphics', 'no_std', 'Display', 'Animation'],
+    githubHref: 'https://github.com/Project-Olivaw',
+    badgeText: 'Alpha',
+    badgeColor: 'yellow',
+    iconName: 'cog-6-tooth',
+    accentColor: 'yellow',
+  },
+];
+---
+
+<section id="projects" class="section projects">
+  <div class="container">
+    <div class="projects__header" data-animate>
+      <SectionTitle
+        eyebrow="Current Projects"
+        title="Components ready to use."
+        subtitle="Two focused tools, built for real-world robotics workflows. Copy the code, wire it to your hardware, ship it."
+      />
+    </div>
+
+    <div class="projects__grid" data-animate-stagger>
+      {
+        projects.map((project) => (
+          <Card
+            title={project.title}
+            description={project.description}
+            tags={project.tags}
+            href={project.githubHref}
+            badgeText={project.badgeText}
+            badgeColor={project.badgeColor}
+            iconName={project.iconName}
+            accentColor={project.accentColor}
+          />
+        ))
+      }
+    </div>
+
+    <div class="projects__cta" data-animate>
+      <p class="projects__cta-text">
+        More components are in development. Follow the project to stay updated.
+      </p>
+      <Button
+        variant="secondary"
+        href="https://github.com/Project-Olivaw"
+        external={true}
+        iconLeft="github"
+      >
+        Watch on GitHub
+      </Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects__header {
+    margin-bottom: 3rem;
+  }
+
+  .projects__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .projects__cta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    flex-wrap: wrap;
+  }
+
+  .projects__cta-text {
+    flex: 1;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    min-width: 20ch;
+  }
+
+  @media (max-width: 768px) {
+    .projects__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .projects__cta {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

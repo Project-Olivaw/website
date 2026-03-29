@@ -1,0 +1,213 @@
+---
+import Button from '../ui/Button.astro';
+import Badge from '../ui/Badge.astro';
+---
+
+<section class="hero">
+  <!-- Dot grid background -->
+  <div class="hero__bg dot-grid" aria-hidden="true"></div>
+
+  <!-- Gradient orbs for visual depth -->
+  <div class="hero__orb hero__orb--blue" aria-hidden="true"></div>
+  <div class="hero__orb hero__orb--red" aria-hidden="true"></div>
+
+  <div class="container hero__content" data-animate>
+    <Badge text="Open Source" color="blue" />
+
+    <h1 class="hero__headline">
+      Rust Components<br />
+      for <span class="gradient-text">Robotics</span>
+    </h1>
+
+    <p class="hero__tagline">
+      Like shadcn/ui, but for Rust libraries. Browse, copy, paste,
+      and own your embedded systems components — no abstractions,
+      no magic, just code you control.
+    </p>
+
+    <div class="hero__ctas">
+      <Button
+        variant="primary"
+        href="https://github.com/Project-Olivaw"
+        external={true}
+        iconLeft="github"
+        size="lg"
+      >
+        View on GitHub
+      </Button>
+      <Button
+        variant="secondary"
+        href="#projects"
+        iconRight="arrow-right"
+        size="lg"
+      >
+        Explore Projects
+      </Button>
+    </div>
+
+    <div class="hero__stats" data-animate-stagger>
+      <div class="hero__stat">
+        <span class="hero__stat-value">Rust</span>
+        <span class="hero__stat-label">Primary Language</span>
+      </div>
+      <div class="hero__stat-divider" aria-hidden="true"></div>
+      <div class="hero__stat">
+        <span class="hero__stat-value">no_std</span>
+        <span class="hero__stat-label">Embedded Ready</span>
+      </div>
+      <div class="hero__stat-divider" aria-hidden="true"></div>
+      <div class="hero__stat">
+        <span class="hero__stat-value">MIT</span>
+        <span class="hero__stat-label">Open Source</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: calc(100vh - 4rem);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.6;
+  }
+
+  .hero__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+
+  .hero__orb--blue {
+    width: 600px;
+    height: 600px;
+    top: -200px;
+    right: -100px;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--color-accent-blue) 8%, transparent) 0%,
+      transparent 70%
+    );
+  }
+
+  .hero__orb--red {
+    width: 400px;
+    height: 400px;
+    bottom: -150px;
+    left: -100px;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--color-accent-red) 6%, transparent) 0%,
+      transparent 70%
+    );
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    padding-block: 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.75rem;
+  }
+
+  .hero__headline {
+    font-size: var(--text-hero);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: var(--color-text-primary);
+    max-width: 14ch;
+  }
+
+  .hero__tagline {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    max-width: 52ch;
+  }
+
+  .hero__ctas {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    flex-wrap: wrap;
+  }
+
+  .hero__stats {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+  }
+
+  .hero__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .hero__stat-value {
+    font-family: var(--font-mono);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .hero__stat-label {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .hero__stat-divider {
+    width: 1px;
+    height: 2.5rem;
+    background-color: var(--color-border);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      min-height: auto;
+    }
+
+    .hero__content {
+      padding-block: 4rem 3rem;
+    }
+
+    .hero__headline {
+      max-width: none;
+    }
+
+    .hero__ctas {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    .hero__stats {
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .hero__stat-divider {
+      display: none;
+    }
+  }
+</style>

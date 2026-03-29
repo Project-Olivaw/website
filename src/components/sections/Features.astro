@@ -1,0 +1,80 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import Card from '../ui/Card.astro';
+import type { FeaturePillar } from '../../types/components';
+
+const pillars: FeaturePillar[] = [
+  {
+    iconName: 'shield',
+    title: 'Memory Safety',
+    description:
+      "Rust's ownership model eliminates entire classes of bugs at compile time — no buffer overflows, no use-after-free, no data races. Critical for systems where failure is not an option.",
+    accentColor: 'red',
+  },
+  {
+    iconName: 'bolt',
+    title: 'Zero Overhead',
+    description:
+      "Zero-cost abstractions mean you pay only for what you use. Rust compiles to the same machine code as hand-optimized C, with no runtime or garbage collector consuming your precious cycles.",
+    accentColor: 'blue',
+  },
+  {
+    iconName: 'cpu-chip',
+    title: 'Embedded-First',
+    description:
+      'Built for constrained environments. Components target `no_std` compatibility where possible, running on bare-metal microcontrollers with kilobytes of RAM, not gigabytes.',
+    accentColor: 'yellow',
+  },
+  {
+    iconName: 'code-bracket',
+    title: 'Type Safety',
+    description:
+      "Rust's type system encodes hardware state machines, communication protocols, and sensor ranges directly into the types. Misuse becomes a compile error, not a runtime crash.",
+    accentColor: 'blue',
+  },
+];
+---
+
+<section id="features" class="section section--subtle features">
+  <div class="container">
+    <div class="features__header" data-animate>
+      <SectionTitle
+        eyebrow="Why Rust"
+        title="Built for systems that cannot fail."
+        subtitle="Rust was purpose-built for the constraints of embedded and safety-critical software. Project Olivaw leverages every advantage."
+        align="center"
+      />
+    </div>
+
+    <div class="features__grid" data-animate-stagger>
+      {
+        pillars.map((pillar) => (
+          <Card
+            title={pillar.title}
+            description={pillar.description}
+            iconName={pillar.iconName}
+            accentColor={pillar.accentColor}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .features__header {
+    margin-bottom: 3.5rem;
+  }
+
+  .features__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  @media (max-width: 768px) {
+    .features__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

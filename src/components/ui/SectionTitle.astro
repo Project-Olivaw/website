@@ -1,0 +1,58 @@
+---
+import type { SectionTitleProps } from '../../types/components';
+
+interface Props extends SectionTitleProps {}
+
+const { eyebrow, title, subtitle, align = 'left' } = Astro.props;
+---
+
+<div class={`section-title section-title--${align}`}>
+  {eyebrow && <p class="section-title__eyebrow">{eyebrow}</p>}
+  <h2 class="section-title__heading">{title}</h2>
+  {subtitle && <p class="section-title__subtitle">{subtitle}</p>}
+</div>
+
+<style>
+  .section-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .section-title--center {
+    align-items: center;
+    text-align: center;
+  }
+
+  .section-title--left {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .section-title__eyebrow {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent-blue);
+  }
+
+  .section-title__heading {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+  }
+
+  .section-title__subtitle {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    max-width: 56ch;
+  }
+
+  .section-title--center .section-title__subtitle {
+    max-width: 60ch;
+  }
+</style>

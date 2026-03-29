@@ -1,0 +1,193 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<section id="about" class="section about">
+  <div class="container about__inner">
+    <div class="about__text" data-animate>
+      <SectionTitle
+        eyebrow="What is Project Olivaw"
+        title="Like shadcn/ui, but for Rust."
+        subtitle="We believe the best code is code you own. No opaque libraries, no hidden behavior — just clear, auditable Rust that you copy directly into your project and modify as you see fit."
+      />
+
+      <div class="about__body">
+        <p>
+          shadcn/ui changed how frontend developers think about component libraries:
+          instead of installing a black-box package, you get the actual source code.
+          Project Olivaw applies that same philosophy to the Rust robotics and embedded
+          ecosystem.
+        </p>
+        <p>
+          Browse a growing collection of components — sensor pipelines, display drivers,
+          communication protocols, and more. Copy the Rust source into your own crate.
+          Adapt it to your hardware. You own it completely.
+        </p>
+      </div>
+    </div>
+
+    <div class="about__callout" data-animate>
+      <div class="about__callout-inner">
+        <div class="about__callout-icon">
+          <Icon name="code-bracket" size={24} ariaHidden={true} />
+        </div>
+        <blockquote class="about__quote">
+          <p>
+            "The component is not a dependency — it is your code, committed to
+            your repository, owned by your team."
+          </p>
+        </blockquote>
+
+        <div class="about__comparison">
+          <div class="about__comparison-item about__comparison-item--before">
+            <span class="about__comparison-label">Traditional</span>
+            <code>cargo add some-robotics-lib</code>
+            <p>Hidden implementation. Tied to upstream changes.</p>
+          </div>
+          <div class="about__comparison-arrow" aria-hidden="true">
+            <Icon name="arrow-right" size={16} />
+          </div>
+          <div class="about__comparison-item about__comparison-item--after">
+            <span class="about__comparison-label">Olivaw</span>
+            <code>cp olivaw/sensor_plotter.rs src/</code>
+            <p>Visible, auditable, modifiable. You own it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .about__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .about__body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .about__body p {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+  }
+
+  .about__callout {
+    position: sticky;
+    top: 6rem;
+  }
+
+  .about__callout-inner {
+    background-color: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .about__callout-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: var(--radius-md);
+    background-color: color-mix(in srgb, var(--color-accent-blue) 10%, transparent);
+    color: var(--color-accent-blue);
+  }
+
+  .about__quote {
+    border-left: 3px solid var(--color-accent-blue);
+    padding-left: 1rem;
+  }
+
+  .about__quote p {
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .about__comparison {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  .about__comparison-item {
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .about__comparison-item--before {
+    background-color: color-mix(in srgb, var(--color-accent-red) 4%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent-red) 20%, transparent);
+  }
+
+  .about__comparison-item--after {
+    background-color: color-mix(in srgb, var(--color-accent-blue) 5%, transparent);
+    border-color: color-mix(in srgb, var(--color-accent-blue) 20%, transparent);
+  }
+
+  .about__comparison-label {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+
+  .about__comparison-item code {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-code);
+    padding: 0.3rem 0.5rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
+  }
+
+  .about__comparison-item p {
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .about__comparison-arrow {
+    display: flex;
+    justify-content: center;
+    color: var(--color-text-muted);
+    transform: rotate(90deg);
+  }
+
+  @media (max-width: 900px) {
+    .about__inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .about__callout {
+      position: static;
+    }
+  }
+</style>

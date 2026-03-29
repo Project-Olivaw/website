@@ -1,0 +1,167 @@
+---
+import SectionTitle from '../ui/SectionTitle.astro';
+import CodeBlock from '../ui/CodeBlock.astro';
+import type { CodeBlockProps } from '../../types/components';
+
+interface Step {
+  number: string;
+  title: string;
+  description: string;
+  code: string;
+  language: CodeBlockProps['language'];
+  filename: string;
+}
+
+const steps: Step[] = [
+  {
+    number: '01',
+    title: 'Browse the registry',
+    description: 'Explore available components on GitHub. Each component has its own directory with source code, documentation, and usage examples.',
+    code: `# Clone or browse the repository
+git clone https://github.com/Project-Olivaw/sensor-plotter
+# Or simply browse at:
+# https://github.com/Project-Olivaw`,
+    language: 'bash',
+    filename: 'terminal',
+  },
+  {
+    number: '02',
+    title: 'Add required dependencies',
+    description: 'Each component lists its dependencies. Add only what you need to your Cargo.toml.',
+    code: `[dependencies]
+# For Sensor Plotter
+egui = "0.30"
+eframe = "0.30"
+
+# For Robotic Display Face
+embedded-graphics = "0.8"`,
+    language: 'toml',
+    filename: 'Cargo.toml',
+  },
+  {
+    number: '03',
+    title: 'Copy the component source',
+    description: 'Copy the Rust source file directly into your project. No package installation, no hidden abstractions — the code is yours to read, modify, and own.',
+    code: `// src/sensor_plotter.rs — copied from Project Olivaw
+// Adapt it freely to your specific hardware and use case.
+
+use egui::plot::{Line, Plot, PlotPoints};
+
+pub struct SensorPlotter {
+    pub channels: Vec<SensorChannel>,
+}
+
+impl SensorPlotter {
+    pub fn new() -> Self {
+        Self { channels: Vec::new() }
+    }
+
+    pub fn add_channel(&mut self, name: &str) {
+        self.channels.push(SensorChannel::new(name));
+    }
+
+    pub fn push_sample(&mut self, channel: usize, value: f64) {
+        if let Some(ch) = self.channels.get_mut(channel) {
+            ch.push(value);
+        }
+    }
+}`,
+    language: 'rust',
+    filename: 'src/sensor_plotter.rs',
+  },
+];
+---
+
+<section id="getting-started" class="section section--subtle getting-started">
+  <div class="container">
+    <div class="getting-started__header" data-animate>
+      <SectionTitle
+        eyebrow="Getting Started"
+        title="Three steps. No magic."
+        subtitle="The entire philosophy of Project Olivaw is transparency. Here is everything you need to get from zero to running component."
+        align="center"
+      />
+    </div>
+
+    <div class="getting-started__steps">
+      {
+        steps.map((step) => (
+          <div class="getting-started__step" data-animate>
+            <div class="getting-started__step-header">
+              <span class="getting-started__step-number">{step.number}</span>
+              <div>
+                <h3 class="getting-started__step-title">{step.title}</h3>
+                <p class="getting-started__step-desc">{step.description}</p>
+              </div>
+            </div>
+            <CodeBlock
+              code={step.code}
+              language={step.language}
+              filename={step.filename}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .getting-started__header {
+    margin-bottom: 4rem;
+  }
+
+  .getting-started__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    max-width: 800px;
+    margin-inline: auto;
+  }
+
+  .getting-started__step {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .getting-started__step-header {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .getting-started__step-number {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    color: var(--color-accent-blue);
+    background-color: color-mix(in srgb, var(--color-accent-blue) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-accent-blue) 25%, transparent);
+    border-radius: var(--radius-md);
+    padding: 0.3rem 0.6rem;
+    flex-shrink: 0;
+    letter-spacing: 0.05em;
+  }
+
+  .getting-started__step-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+    margin-bottom: 0.375rem;
+  }
+
+  .getting-started__step-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 640px) {
+    .getting-started__step-header {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+</style>
